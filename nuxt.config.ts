@@ -1,7 +1,9 @@
+import { Configuration } from '@nuxt/types'
 const pkg = require('./package')
 
-module.exports = {
+const config: Configuration = {
   mode: 'universal',
+  buildModules: ['@nuxt/typescript-build'],
 
   /*
   ** Headers of the page
@@ -45,7 +47,7 @@ module.exports = {
     */
     extend(config, ctx) {
       // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
+      if (config.module && ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -56,3 +58,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = config
